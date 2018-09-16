@@ -9,7 +9,7 @@ import { Film } from './films/film';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private title = 'Film club';
+  public title = 'Film club';
   private films: Film[];
     
   constructor(private filmService: FilmService) { }
