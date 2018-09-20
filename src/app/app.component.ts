@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from './films/film.service';
-import { HttpClient } from '@angular/common/http';
 import { Film } from './films/film';
+import { UserService } from './users/user.service';
+import { User } from './users/user';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +12,16 @@ import { Film } from './films/film';
 export class AppComponent implements OnInit {
   public title = 'Film club';
   private films: Film[];
-    
-  constructor(private filmService: FilmService) { }
+  private users: User[];  
 
-  ngOnInit(): void {
-    console.log("Initialising...");
-    this.filmService.list().subscribe(f => console.log(f));
-  }
+  constructor(
+    private userService: UserService,
+    private filmService: FilmService
+  ) { }
 
-  public clicked(): void {
-    console.log("You clicked the button");
+  ngOnInit(): void { }
+
+  public async clicked(): Promise<void> {
+    this.users = await this.userService.list();
   }
 }
